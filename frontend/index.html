@@ -1,19 +1,33 @@
 <html>
 <head>
+<link type="text/css" rel="stylesheet" href="style.css"></link>
 <title>Betable Game</title>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
 </script>
-
+<script type="text/javascript" src="jquery.sound.js"></script>
 <script type="text/javascript" src="script.js">
 </script>
 
 </head>
-<body onLoad="load()">
+<body>
 
 <canvas id="main_canvas" width="960" height="700">
 
 </canvas>
-<div id="overlay">
+<div id="overlay" class="overlay" style="display:none;">
+	<span id="overlay_text1" class="first_line"><img src="stumble.svg" width="30" height="30"/></span>
+	<span id="overlay_text2" class="second_line"></span>
+	<div id="wager">
+		$<input type="text" value="1.00" id="amount"/>
+		<input type="button" id="bet" value="Wager"/>
+	</div>
+</div>
+<div id="overlay2" class="overlay" style="display:none;">
+	<span id="overlay_text1" class="first_line"></span>
+	<span id="overlay_text2" class="second_line"></span>
+	<div id="results">
+		<div id="leftHand"/><div id="rightHand"/>
+	</div>
 </div>
 </body>
 </html>
