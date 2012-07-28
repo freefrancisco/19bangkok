@@ -1,11 +1,10 @@
 module.exports = {
-    game_id       : ''
+    game_id       : 'XwKF1UXLas2tjkxz_MrUlQ'
   , port          : 8000
   , configuration : {
-        symbols  : [ "fingers"
-                   , "toes"
-                   , "screaming" ]
+        symbols  : [ "heads"
+                   , "tails" ]
       , window   : [ 4, 3 ]
-      , paylines : [ [1,1,1,1], [0,0,0,0], [2,2,2,2] ]
+      , paylines : [ [1,1,1] ]
     }
 }
