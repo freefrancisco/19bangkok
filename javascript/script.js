@@ -74,8 +74,8 @@ function game() {
 				$(".overlay").css("background-color","#eee");
 				$(".overlay").css("position","absolute");
 				$(".overlay").css("border","1px black solid");
-				$(".overlay").css("left",16+curN*(10+87) + "px");
-				$(".overlay").css("top",16+curM*(10+61) + "px");
+				$(".overlay").css("left",11+curN*(10+87) + "px");
+				$(".overlay").css("top",36+curM*(10+61) + "px");
 				$(".overlay").css("width",r*87  + "px");
 				$(".overlay").css("height",r*61 + "px");
 				var rnd=Math.random();
@@ -96,94 +96,104 @@ function game() {
 				clearInterval(i);
 				
 				$("#bet").click(function() {
-					$(".first_line").html("You wagered " + $("#amount").val() + " " + wagerFor[oc]);
-					$(".second_line").html("It's time to play");
-					$("#overlay").hide();
-					$("#overlay2").show();
-					$("#results").hide();
-					var result;
-					if(Math.random() > .5) {
-						result=0;
-					}
-					else {
-						result=1;
-					}
-					var t=0;
-					$("#leftHand").css("background-image","paperClear.gif");
-					$("#rightHand").css("background-image","paperClear.gif");
-					$("#leftHand").show();
-					$("#rightHand").show();
-					
-					var i=setInterval(function(){
-						t += 1;
-						var bi;
-						if(t==0) {
-							$("#leftHand").css("background-image","paperClear.gif");
-							$("#rightHand").css("background-image","paperClear.gif");
+						$(".first_line").html("You wagered " + $("#amount").val() + " " + wagerFor[oc]);
+						$(".second_line").html("It's time to play");
+						$("#overlay").hide();
+						$("#overlay2").show();
+						$("#results").hide();
+						var result;
+						if(Math.random() > .5) {
+							result=0;
 						}
-						else if(t==1) {
-							$("#leftHand").css("background-image","rockFull.gif");
-							$("#rightHand").css("background-image","rockFull.gif");
-							
+						else {
+							result=1;
 						}
-						else if(t==2) {
-							$("#leftHand").css("background-image","rockClear.gif");
-							$("#rightHand").css("background-image","rockClear.gif");
-							
-						}
-						if(t==3) {
-							clearInterval(i);
-							var parity=0;
-							var leftImg, rightImg;
-							var rnd=Math.random();
-							if(rnd < .333) {
-								leftImg="paper";
-								if(result==0) {
-									rightImg="rock";
-								}
-								else {
-									rightImg="scissors";
-								}
+						var t=0;
+						$("#leftHand").css("background-image","url('/frontend/paperClear.gif')");
+						$("#rightHand").css("background-image","url('/frontend/paperClear.gif')");
+						$("#leftHand").show();
+						$("#rightHand").show();
+						$("#results").show();
+
+						var i=setInterval(function(){
+							t += 1;
+							var bi;
+							if(t==0) {
+								$("#leftHand").css("background-image","url('/frontend/paperClear.gif')");
+								$("#rightHand").css("background-image","url('/frontend/paperClear.gif')");
 							}
-							else if(rnd < .666) {
-								leftImg="rock";
-								if(result==0) {
-									rightImg="paper";
-								}
-								else {
-									rightImg="scissors";
-								}
+							else if(t==1) {
+								$("#leftHand").css("background-image","url('/frontend/rockFull.gif')");
+								$("#rightHand").css("background-image","url('/frontend/rockFull.gif')");
+
 							}
-							else {
-								leftImg="scissors";
-								if(result==0) {
-									rightImg="paper";
-								}
-								else {
-									rightImg="rock";
-								}
+							else if(t==2) {
+								$("#leftHand").css("background-image","url('/frontend/rockClear.gif')");
+								$("#rightHand").css("background-image","url('/frontend/rockClear.gif')");
+
 							}
-							var bi=setInterval(function(){
-								if(parity==0) {
-									$("#leftHand").css("background-image",leftImg + "Clear.gif");
-									$("#rightHand").css("background-image",rightImg + "Clear.gif");
-									parity=1;
+							if(t==3) {
+								clearInterval(i);
+								var parity=0;
+								var leftImg, rightImg;
+								var rnd=Math.random();
+								if(rnd < .333) {
+									leftImg="paper";
+									if(result==0) {
+										rightImg="rock";
+									}
+									else {
+										rightImg="scissors";
+									}
+								}
+								else if(rnd < .666) {
+									leftImg="rock";
+									if(result==0) {
+										rightImg="paper";
+									}
+									else {
+										rightImg="scissors";
+									}
 								}
 								else {
-									$("#leftHand").css("background-image",leftImg + "Full.gif");
-									$("#rightHand").css("background-image",rightImg + "Full.gif");
-									parity=0;
+									leftImg="scissors";
+									if(result==0) {
+										rightImg="paper";
+									}
+									else {
+										rightImg="rock";
+									}
 								}
-							},100);
-							setTimeout(function(){
-								clearInterval(bi);
-								$(".overlay").hide();
-								draw();
-								canMove=1;
-							},3000);
-						}
-					},500);
-				});
+								//Blink for win
+								if(result==0) {
+									var bi=setInterval(function(){
+										if(parity==0) {
+											$("#leftHand").css("background-image","url('/frontend/" + leftImg + "Clear.gif')");
+											$("#rightHand").css("background-image","url('/frontend/" + rightImg + "Clear.gif')");
+											parity=1;
+										}
+										else {
+											$("#leftHand").css("background-image","url('/frontend/" + leftImg + "Full.gif')");
+											$("#rightHand").css("background-image","url('/frontend/" + rightImg + "Full.gif')");
+											parity=0;
+										}
+										},100);
+								}
+								else {
+									$("#leftHand").css("background-image","url('/frontend/" + leftImg + "Full.gif')");
+									$("#rightHand").css("background-image","url('/frontend/" + rightImg + "Full.gif')");
+								}
+								setTimeout(function(){
+									if(result==0) {
+										clearInterval(bi);
+									}
+									$(".overlay").hide();
+									draw();
+									canMove=1;
+								},3000);
+							}
+						},500);
+					});
 			}
 		},1);
 	}
@@ -203,9 +213,9 @@ function game() {
 			}	
 		}
 		personImg = new Image();
-		personImg.src='backpackerShadow.png';
+		personImg.src='/frontend/backpackerShadow.png';
 		personImgNS = new Image();
-		personImgNS.src='backpacker.gif'
+		personImgNS.src='/frontend/backpacker.gif'
 		drawThing(ourX,ourY, personImg);
 	}
 	function load() {
