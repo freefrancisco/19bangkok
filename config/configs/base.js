@@ -4,7 +4,7 @@ module.exports = {
   , configuration : {
         symbols  : [ "heads"
                    , "tails" ]
-      , window   : [ 4, 3 ]
+      , window   : [ 3, 3 ]
       , paylines : [ [1,1,1] ]
     }
 }
