@@ -1,15 +1,11 @@
-Betable Test App
-===================
-
-This is a simple test app built on top of the Betable Node.js SDK, and the Betable frontend Javascript SDK.
-The game is a configurable slot machine.
-
+One night in Bangkok aka What happens in Bangkok
+------------------------------------------------
+  A game buit for Betable hackathon July 27-29, 2012 
 
 Installation
 ------------
 *npm install*
 (from the app directory)
-
 
 Configuration
 ------------
