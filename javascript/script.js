@@ -97,7 +97,7 @@ function game() {
 	                    oc=storyline.length-1;
 	                }
 	                $(".first_line").html(storyline[oc].situation);
-	                $(".second_line").html("Make a wager and try to get away!");
+	                $(".second_line").html(storyline[oc].wager);
 					//$("#situation_image").attr("src","/images/" + storyline[oc].situation_image);
 	                $("#overlay").show();
 	                clearInterval(i);
