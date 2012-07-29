@@ -29,6 +29,6 @@
 
  // Text shown at destination
  var end_of_line = {
-     "text": "You have reached the beach at Phuket- have a great time!",
+     "text": "You have reached the beach at Phuket. Have a great time!",
      "cashout_text":"Party on the beach with "
  };

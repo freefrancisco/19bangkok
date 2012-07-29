@@ -36,6 +36,7 @@ function game() {
     }
 
     function drawTile(n,m) {
+
         if(map[m][n]==0) {
             ctx.fillStyle = landColor;
         }
@@ -48,6 +49,12 @@ function game() {
         ctx.fillRect(n*(10+87),m*(10+61),87,61);
         ctx.strokeStyle = borderColor;
         ctx.strokeRect(n*(10+87),m*(10+61),87,61);
+		if(n==0 && m==9) {
+			var endImg=new Image();
+			endImg.src="/frontend/beach.png";
+			ctx.drawImage(endImg,(10+87)*n,m*(10+61));
+			
+		}
     }
     function blowupTile(n,m,r) {
         var t=0;
@@ -91,7 +98,7 @@ function game() {
 	                }
 	                $(".first_line").html(storyline[oc].situation);
 	                $(".second_line").html("Make a wager and try to get away!");
-					$("#situation_image").attr("src","/images/" + storyline[oc].situation_image);
+					//$("#situation_image").attr("src","/images/" + storyline[oc].situation_image);
 	                $("#overlay").show();
 	                clearInterval(i);
 				
@@ -163,10 +170,10 @@ function game() {
                                     else if(rnd < .666) {
                                         leftImg="rock";
                                         if(result==0) {
-                                            rightImg="paper";
+                                            rightImg="scissors";
                                         }
                                         else {
-                                            rightImg="scissors";
+                                            rightImg="paper";
                                         }
                                     }
                                     else {
@@ -192,7 +199,7 @@ function game() {
                                                 $("#rightHand").css("background-image","url('/frontend/" + rightImg + "Full.gif')");
                                                 parity=0;
                                             }
-                                            },100);
+                                            },300);
                                     }
                                     else {
                                         $("#leftHand").css("background-image","url('/frontend/" + leftImg + "Full.gif')");
@@ -226,7 +233,7 @@ function game() {
 				else {
 					clearInterval(i);
 					$(".first_line").html(end_of_line.text);
-					$(".second_line").html(end_of_line.cashout_text + " " + $("#balance").html());
+					$(".second_line").html(end_of_line.cashout_text + " £" + $("#balance").html());
 					$("#overlay4").show();
 				}
  			}
