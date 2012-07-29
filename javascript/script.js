@@ -77,7 +77,7 @@ function game() {
             var curN=n + t*(targetN-n);
             var curM=m + t*(targetM-m);
             ctx.fillStyle = "#ccc";
-            ctx.fillRect(10+curN*(10+87),10+curM*(10+61),87+(r*87-87)*t,61+(r*61-61)*t);
+            ctx.fillRect(10+curN*(10+87),10+curM*(10+61),87+(r*84-87)*t,61+(r*44-61)*t);
             t += .1;
             if(Math.abs(t-1)<.01) {
 				clearInterval(i);
@@ -86,8 +86,8 @@ function game() {
                 $(".overlay").css("border","1px black solid");
                 $(".overlay").css("left",11+curN*(10+87) + "px");
                 $(".overlay").css("top",36+curM*(10+61) + "px");
-                $(".overlay").css("width",r*87  + "px");
-                $(".overlay").css("height",r*61 + "px");
+                $(".overlay").css("width",r*84  + "px");
+                $(".overlay").css("height",r*44 + "px");
 
 				//Check for last tile
 				if(n!=0 || m!=9) {
@@ -98,16 +98,24 @@ function game() {
 	                    storyline_index=storyline.length-1;
 	                }
 	                $(".first_line").html(storyline[storyline_index].situation);
-	                $(".second_line").html("Wager " + storyline[storyline_index].wager);
+					if(storyline[storyline_index].wager.length > 0) {
+	                	$(".second_line").html("Wager " + storyline[storyline_index].wager);
+					}
+					else {
+						$(".second_line").html("");
+					}
 					//$("#situation_image").attr("src","/images/" + storyline[storyline_index].situation_image);
+					$("#overlay").css("background-image","url('" + "/images/" + storyline[storyline_index].background_image) + "')";
+					$("#overlay").css("background-position","-20px -25px");
 	                $("#overlay").show();
 				
 					$("#bet").unbind();
 	                $("#bet").click(function() {
 						$("#overlay").hide();
-                        $(".first_line").html("You wagered £" + $("#amount").val() + " " + storyline[storyline_index].wager);
-                        $(".second_line").html("It's time to play");
-                        $("#overlay2").show();
+						$("#overlay2").css('background-image',"url('/images/" + storyline[storyline_index].slot_background + "')");
+                        $("#overlay2").css("background-position","-20px -25px");
+						
+						$("#overlay2").show();
                         $("#results").hide();
                         var result;
                         $.ajax({url: "https://api.betable.com/1.0/games/" + game_id + "/bet?access_token=" + access_token ,
@@ -213,11 +221,15 @@ function game() {
                                         if(result==0) {
                                             $("#outcome").html("You won!");
                                             $("#outcome-second-line").html(storyline[storyline_index].win);
+											$("#overlay3").css('background-image',"url('/images/" + storyline[storyline_index].win_image + "')");
+
                                         }
                                         else {
                                             $("#outcome").html("You lost!");
                                             $("#outcome-second-line").html(storyline[storyline_index].lose);
+											$("#overlay3").css('background-image',"url('/images/" + storyline[storyline_index].lose_image + "')");
                                         }
+				                        $("#overlay3").css("background-position","-20px -25px");
                                         $("#overlay3").show();
 
                                         setTimeout(function() {
@@ -301,7 +313,7 @@ function game() {
                 }
             }
             else {
-                ctx.fillStyle = "red";
+                ctx.fillStyle = "#ac4500";
             }
             ctx.fillRect(x,y,width,height);
             drawThing(n,m,personImg);

@@ -11,61 +11,62 @@ body {
 	border: 1px solid #ccc;
 	border-radius: 3px;
 	padding-top:10px;
+	padding-left:5px;
 }
 
 .first_line {
 	display: block;
-	font-style:italic;
+	font-weight:bold;
 	padding-left: 4px;
 	padding-top: 16px;
-	font-size: 22px;
+	font-size: 20px;
 	letter-spacing: 1px;
 	padding-bottom: 4px;
-	border-bottom: 1px solid black;
 	text-align: left;
 }
 
 .second_line {
 	padding-left: 4px;
 	padding-top: 15px;
-	font-weight:bold;
 	display: block;
-	border-bottom: 1px solid black;
 	padding-bottom: 4px;
 	text-align: left;
-	background: white;
-	font-size: 25px;
+	font-size: 16px;
 	line-height: 25px;
 	letter-spacing:1px;
 }
 
 #wager {
-	padding-left: 4px;
-	padding-top: 30px;
-	font-size: 32pt;
-	margin-left: 18px;
+	padding-left: 0px;
+	padding-top: 0px;
+	font-size: 16pt;
+	margin-left: 0px;
+	position:absolute;
+	bottom:10px;
 }
 
 input {
-	height: 60px;
+	height: 30px;
 	width: 150px;
 	border-radius: 3px;
 	border: none;
-	font-size:32pt;
+	font-size:16pt;
 }
 #input_container {
-	float:left;
+	position: relative;
+	top: 3px;
 }
 #bet {
-	height: 50px;
-	width: 200px;
+	margin-top:10px;
+	height: 40px;
+	width: 190px;
 	background-image:url('/frontend/wager.png');
 	border-radius: 3px;
 	border: none;
-	padding-top: 15px;
+	margin-top: 10px;
 	text-align: center;
 	font-size: 24px;
-	float:right;
+	background-position:-14px -11px;
 	/*background: #F57A2E;*/
 	text-decoration: underline;
 }
@@ -91,6 +92,16 @@ input {
 	height:164px;
 	background-repeat:no-repeat;
 	float:left;
+}
+#leftHand {
+	position:absolute;
+	top:60px;
+	left:90px;
+}
+#rightHand {
+	position:absolute;
+	top:60px;
+	left:215px;
 }
 
 #outcome {
