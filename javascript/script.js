@@ -80,18 +80,22 @@ function game() {
                 $(".overlay").css("top",36+curM*(10+61) + "px");
                 $(".overlay").css("width",r*87  + "px");
                 $(".overlay").css("height",r*61 + "px");
-                var rnd=Math.random();
-                rnd=Math.random();
-                var oc=Math.floor(storyline.length*Math.random());
-                if(oc>=storyline.length) {
-                    oc=storyline.length-1;
-                }
-                $(".first_line").html(storyline[oc].situation);
-                $(".second_line").html("Make a wager and try to get away!");
-                $("#overlay").show();
-                clearInterval(i);
 
-                $("#bet").click(function() {
+				//Check for last tile
+				if(n!=0 || m!=9) {
+                	var rnd=Math.random();
+	                rnd=Math.random();
+	                var oc=Math.floor(storyline.length*Math.random());
+	                if(oc>=storyline.length) {
+	                    oc=storyline.length-1;
+	                }
+	                $(".first_line").html(storyline[oc].situation);
+	                $(".second_line").html("Make a wager and try to get away!");
+	                $("#overlay").show();
+	                clearInterval(i);
+				
+				
+	                $("#bet").click(function() {
                         $(".first_line").html("You wagered " + $("#amount").val() + " " + storyline[oc].wager);
                         $(".second_line").html("It's time to play");
                         $("#overlay").hide();
@@ -108,7 +112,9 @@ function game() {
                             }),
                             dataType:"json",
                             success: function(blah) {
-
+							var pBalance=parseFloat($("#balance").html());
+							pBalance -= parseFloat($("#amount").val());
+							pBalance += parseFloat(blah.payout);
                             if(blah["outcomes"][0]["outcome"]=="win") {
                                 result=0;
                             }
@@ -139,7 +145,7 @@ function game() {
                                     $("#rightHand").css("background-image","url('/frontend/rockClear.gif')");
 
                                 }
-                                if(t==3) {
+                                else if(t==3) {
                                     clearInterval(i);
                                     var parity=0;
                                     var leftImg, rightImg;
@@ -171,6 +177,7 @@ function game() {
                                             rightImg="rock";
                                         }
                                     }
+									$("#balance").html(pBalance);
                                     //Blink for win
                                     if(result==0) {
                                         var bi=setInterval(function(){
@@ -214,7 +221,14 @@ function game() {
                         },500);
                     }});
                 });
-            }
+       			}
+				else {
+					clearInterval(i);
+					$(".first_line").html(end_of_line.text);
+					$(".second_line").html(end_of_line.cashout_text + " " + $("#balance").html());
+					$("#overlay4").show();
+				}
+ 			}
         },1);
     }
     function draw() {
@@ -286,7 +300,7 @@ function game() {
             if(t >= 1) {
                 clearInterval(i);
                 if(Math.random() > 0.5) {
-                    blowupTile(n,m,4);
+                    blowupTile(n,m,5);
                 }
                 else {
                     draw();
@@ -306,6 +320,7 @@ function game() {
             drawThing(x+t*(toX-x),y+t*(toY-y),personImgNS);
             if(t >= 1) {
                 clearInterval(i);
+			
                 rotateTile(toX,toY,dir);
             }
         },1);
