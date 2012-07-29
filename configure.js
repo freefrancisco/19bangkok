@@ -7,6 +7,8 @@ module.exports = function( server ) {
     server.use( '/javascript', express.static( __dirname + '/javascript' ))
     server.use( '/css',        express.static( __dirname + '/css' ))
     server.use( '/frontend', express.static( __dirname + '/frontend' ))
+    server.use( '/images', express.static( __dirname + '/images' ))
+
     server.set( 'view options', { layout: false } )
     server.set( 'views', __dirname + '/' )
     server.register( '.html', {
