@@ -98,14 +98,14 @@ function game() {
 	                    storyline_index=storyline.length-1;
 	                }
 	                $(".first_line").html(storyline[storyline_index].situation);
-	                $(".second_line").html(storyline[storyline_index].wager);
+	                $(".second_line").html("Wager " + storyline[storyline_index].wager);
 					//$("#situation_image").attr("src","/images/" + storyline[storyline_index].situation_image);
 	                $("#overlay").show();
 				
 					$("#bet").unbind();
 	                $("#bet").click(function() {
 						$("#overlay").hide();
-                        $(".first_line").html("You wagered " + $("#amount").val() + " " + storyline[storyline_index].wager);
+                        $(".first_line").html("You wagered £" + $("#amount").val() + " " + storyline[storyline_index].wager);
                         $(".second_line").html("It's time to play");
                         $("#overlay2").show();
                         $("#results").hide();
