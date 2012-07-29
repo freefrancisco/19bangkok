@@ -12,6 +12,8 @@ function game() {
     var WATER=2;
     var outcome = ["It looks like you've come across a sketchy lady.<br/>I've got a bad feeling about this...","Outcome 2","Outcome 3"];
     var wagerFor = ["to try to get away", "to try to balh", "to try to ..."];
+    var winResult = ["winResultA","winResultB","winResultC"];
+    var loseResult = ["loseResultA","loseResultB","loseResultC"];
     //var good = ["You made a new friend!! You just doubled your money.", "You gota great massage!!! You just doubled your money!", "You had a great dinner with friend!!! Your just doubled our money."];
     //var bad = ["You got robbed by a tranny hooker. You just lost a quarter of your money!!", "You got caught with dope. You just lost half your money!!", "You got a stomach bug. You just lost half your money."];
 
@@ -80,23 +82,17 @@ function game() {
                 $(".overlay").css("height",r*61 + "px");
                 var rnd=Math.random();
                 rnd=Math.random();
-                var oc;
-                if(rnd<.33) {
-                    oc=0;
-                }
-                else if(rnd<.66) {
-                    oc=1;
-                }
-                else {
+                var oc=Math.floor(storyline.length*Math.random());
+                if(oc>2) {
                     oc=2;
                 }
-                $(".first_line").html(outcome[oc]);
+                $(".first_line").html(storyline[oc].situation);
                 $(".second_line").html("Make a wager and try to get away!");
                 $("#overlay").show();
                 clearInterval(i);
 
                 $("#bet").click(function() {
-                        $(".first_line").html("You wagered " + $("#amount").val() + " " + wagerFor[oc]);
+                        $(".first_line").html("You wagered " + $("#amount").val() + " " + storyline[oc].wager);
                         $(".second_line").html("It's time to play");
                         $("#overlay").hide();
                         $("#overlay2").show();
@@ -112,102 +108,112 @@ function game() {
                             }),
                             dataType:"json",
                             success: function(blah) {
-                                if(blah["outcomes"][0]["outcome"]=="win") {
-                                    result=0;
+
+                            if(Math.random() > .5) {
+                                result=0;
+                            }
+                            else {
+                                result=1;
+                            }
+                            var t=0;
+                            $("#leftHand").css("background-image","url('/frontend/paperClear.gif')");
+                            $("#rightHand").css("background-image","url('/frontend/paperClear.gif')");
+                            $("#leftHand").show();
+                            $("#rightHand").show();
+                            $("#results").show();
+
+                            var i=setInterval(function(){
+                                t += 1;
+                                var bi;
+                                if(t==0) {
+                                    $("#leftHand").css("background-image","url('/frontend/paperClear.gif')");
+                                    $("#rightHand").css("background-image","url('/frontend/paperClear.gif')");
                                 }
-                                else {
-                                    result=1;
+                                else if(t==1) {
+                                    $("#leftHand").css("background-image","url('/frontend/rockFull.gif')");
+                                    $("#rightHand").css("background-image","url('/frontend/rockFull.gif')");
+
                                 }
-                                var t=0;
-                                $("#leftHand").css("background-image","url('/frontend/paperClear.gif')");
-                                $("#rightHand").css("background-image","url('/frontend/paperClear.gif')");
-                                $("#leftHand").show();
-                                $("#rightHand").show();
-                                $("#results").show();
+                                else if(t==2) {
+                                    $("#leftHand").css("background-image","url('/frontend/rockClear.gif')");
+                                    $("#rightHand").css("background-image","url('/frontend/rockClear.gif')");
 
-                                var i=setInterval(function(){
-                                    t += 1;
-                                    var bi;
-                                    if(t==0) {
-                                        $("#leftHand").css("background-image","url('/frontend/paperClear.gif')");
-                                        $("#rightHand").css("background-image","url('/frontend/paperClear.gif')");
-                                    }
-                                    else if(t==1) {
-                                        $("#leftHand").css("background-image","url('/frontend/rockFull.gif')");
-                                        $("#rightHand").css("background-image","url('/frontend/rockFull.gif')");
-
-                                    }
-                                    else if(t==2) {
-                                        $("#leftHand").css("background-image","url('/frontend/rockClear.gif')");
-                                        $("#rightHand").css("background-image","url('/frontend/rockClear.gif')");
-
-                                    }
-                                    if(t==3) {
-                                        clearInterval(i);
-                                        var parity=0;
-                                        var leftImg, rightImg;
-                                        var rnd=Math.random();
-                                        if(rnd < .333) {
-                                            leftImg="paper";
-                                            if(result==0) {
-                                                rightImg="rock";
-                                            }
-                                            else {
-                                                rightImg="scissors";
-                                            }
-                                        }
-                                        else if(rnd < .666) {
-                                            leftImg="rock";
-                                            if(result==0) {
-                                                rightImg="paper";
-                                            }
-                                            else {
-                                                rightImg="scissors";
-                                            }
-                                        }
-                                        else {
-                                            leftImg="scissors";
-                                            if(result==0) {
-                                                rightImg="paper";
-                                            }
-                                            else {
-                                                rightImg="rock";
-                                            }
-                                        }
-                                        //Blink for win
+                                }
+                                if(t==3) {
+                                    clearInterval(i);
+                                    var parity=0;
+                                    var leftImg, rightImg;
+                                    var rnd=Math.random();
+                                    if(rnd < .333) {
+                                        leftImg="paper";
                                         if(result==0) {
-                                            var bi=setInterval(function(){
-                                                if(parity==0) {
-                                                    $("#leftHand").css("background-image","url('/frontend/" + leftImg + "Clear.gif')");
-                                                    $("#rightHand").css("background-image","url('/frontend/" + rightImg + "Clear.gif')");
-                                                    parity=1;
-                                                }
-                                                else {
-                                                    $("#leftHand").css("background-image","url('/frontend/" + leftImg + "Full.gif')");
-                                                    $("#rightHand").css("background-image","url('/frontend/" + rightImg + "Full.gif')");
-                                                    parity=0;
-                                                }
-                                                },100);
+                                            rightImg="rock";
                                         }
                                         else {
-                                            $("#leftHand").css("background-image","url('/frontend/" + leftImg + "Full.gif')");
-                                            $("#rightHand").css("background-image","url('/frontend/" + rightImg + "Full.gif')");
+                                            rightImg="scissors";
                                         }
-                                        setTimeout(function(){
-                                            if(result==0) {
-                                                clearInterval(bi);
+                                    }
+                                    else if(rnd < .666) {
+                                        leftImg="rock";
+                                        if(result==0) {
+                                            rightImg="paper";
+                                        }
+                                        else {
+                                            rightImg="scissors";
+                                        }
+                                    }
+                                    else {
+                                        leftImg="scissors";
+                                        if(result==0) {
+                                            rightImg="paper";
+                                        }
+                                        else {
+                                            rightImg="rock";
+                                        }
+                                    }
+                                    //Blink for win
+                                    if(result==0) {
+                                        var bi=setInterval(function(){
+                                            if(parity==0) {
+                                                $("#leftHand").css("background-image","url('/frontend/" + leftImg + "Clear.gif')");
+                                                $("#rightHand").css("background-image","url('/frontend/" + rightImg + "Clear.gif')");
+                                                parity=1;
                                             }
+                                            else {
+                                                $("#leftHand").css("background-image","url('/frontend/" + leftImg + "Full.gif')");
+                                                $("#rightHand").css("background-image","url('/frontend/" + rightImg + "Full.gif')");
+                                                parity=0;
+                                            }
+                                            },100);
+                                    }
+                                    else {
+                                        $("#leftHand").css("background-image","url('/frontend/" + leftImg + "Full.gif')");
+                                        $("#rightHand").css("background-image","url('/frontend/" + rightImg + "Full.gif')");
+                                    }
+                                    setTimeout(function(){
+                                        if(result==0) {
+                                            clearInterval(bi);
+                                        }
+                                        $("#overlay2").hide();
+                                        $("#overlay3").show();
+                                        if(result==0) {
+                                            $("#outcome").html("You won!");
+                                            $("#outcome-second-line").html(storyline[oc].win);
+                                        }
+                                        else {
+                                            $("#outcome").html("You lost!");
+                                            $("#outcome-second-line").html(storyline[oc].lose);
+                                        }
+                                        setTimeout(function() {
                                             $(".overlay").hide();
                                             draw();
                                             canMove=1;
-                                        },3000);
-                                    }
-                                },500);
-
-                            }
-                        })
-
-                 });
+                                        },1000);
+                                    },3000);
+                                }
+                        },500);
+                    }});
+                });
             }
         },1);
     }

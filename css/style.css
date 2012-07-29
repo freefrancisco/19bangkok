@@ -37,7 +37,7 @@ body {
 #wager {
 	padding-left: 4px;
 	padding-top: 30px;
-	font-size: 32px;
+	font-size: 32pt;
 	margin-left: 18px;
 }
 
@@ -46,6 +46,7 @@ input {
 	width: 150px;
 	border-radius: 3px;
 	border: none;
+	font-size:32pt;
 }
 
 input[type="button"] {
