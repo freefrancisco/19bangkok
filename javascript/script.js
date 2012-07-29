@@ -104,9 +104,9 @@ function game() {
 				
 				
 	                $("#bet").click(function() {
+						$("#overlay").hide();
                         $(".first_line").html("You wagered " + $("#amount").val() + " " + storyline[oc].wager);
                         $(".second_line").html("It's time to play");
-                        $("#overlay").hide();
                         $("#overlay2").show();
                         $("#results").hide();
                         var result;
