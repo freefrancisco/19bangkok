@@ -31,7 +31,7 @@ body {
 	text-align: center;
 	background: white;
 	font-size: 20px;
-	line-height: 40px;
+	line-height: 25px;
 }
 
 #wager {
@@ -76,7 +76,33 @@ input[type="button"]:hover {
 	padding-top: 4px;
 	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
 }
-#left_hand, #right_hand {
-	width:50px;
-	height:50px;
+#leftHand, #rightHand {
+	width:108px;
+	height:164px;
+	background-repeat:no-repeat;
+	float:left;
+}
+
+#outcome {
+	text-align: center;
+	display: block;
+	padding-left: 4px;
+	padding-top: 16px;
+	font-size: 30px;
+	padding-bottom: 4px;
+	margin-top: 20px;
+}
+
+#outcome-second-line {
+	padding-left: 4px;
+	padding-top: 0px;
+	margin-top: 40px;
+	display: block;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	padding-bottom: 4px;
+	text-align: center;
+	background: white;
+	font-size: 20px;
+	line-height: 25px;
 }
