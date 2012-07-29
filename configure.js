@@ -6,13 +6,14 @@ module.exports = function( server ) {
     server.use( express.cookieParser() )
     server.use( '/javascript', express.static( __dirname + '/javascript' ))
     server.use( '/css',        express.static( __dirname + '/css' ))
-    server.set( 'view options', { layout: false } ) 
+    server.use( '/frontend', express.static( __dirname + '/frontend' ))
+    server.set( 'view options', { layout: false } )
     server.set( 'views', __dirname + '/' )
     server.register( '.html', {
         compile: function (str, options) {
-            _.templateSettings = { 
-                interpolate : /\{\{-([\s\S]+?)\}\}/g 
-              , escape      : /\{\{([^-]|[^-][\s\S]+?)\}\}/g 
+            _.templateSettings = {
+                interpolate : /\{\{-([\s\S]+?)\}\}/g
+              , escape      : /\{\{([^-]|[^-][\s\S]+?)\}\}/g
               , evaluate    : /\{\[([\s\S]+?)\]\}/g
             }
             var template = _.template(str)
@@ -21,12 +22,12 @@ module.exports = function( server ) {
             }
         }
     })
-    
+
     server.use( function( req, res, next ) {
-    	req.session = JSON.parse(req.cookies[ 'sid' ] || '{}' )
-    	res.on('header', function() { res.cookie( 'sid', JSON.stringify(req.session) ) })
-    	next()
+        req.session = JSON.parse(req.cookies[ 'sid' ] || '{}' )
+        res.on('header', function() { res.cookie( 'sid', JSON.stringify(req.session) ) })
+        next()
     })
-    
+
     return server
 }
