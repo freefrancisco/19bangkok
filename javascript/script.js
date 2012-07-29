@@ -83,8 +83,8 @@ function game() {
                 var rnd=Math.random();
                 rnd=Math.random();
                 var oc=Math.floor(storyline.length*Math.random());
-                if(oc>2) {
-                    oc=2;
+                if(oc>=storyline.length) {
+                    oc=storyline.length-1;
                 }
                 $(".first_line").html(storyline[oc].situation);
                 $(".second_line").html("Make a wager and try to get away!");
@@ -109,7 +109,7 @@ function game() {
                             dataType:"json",
                             success: function(blah) {
 
-                            if(Math.random() > .5) {
+                            if(blah["outcomes"][0]["outcome"]=="win") {
                                 result=0;
                             }
                             else {
