@@ -78,8 +78,9 @@ function game() {
             var curM=m + t*(targetM-m);
             ctx.fillStyle = "#ccc";
             ctx.fillRect(10+curN*(10+87),10+curM*(10+61),87+(r*87-87)*t,61+(r*61-61)*t);
-            t += .01;
-            if(t>=1) {
+            t += .1;
+            if(Math.abs(t-1)<.01) {
+				clearInterval(i);
                 $(".overlay").css("background-color","#eee");
                 $(".overlay").css("position","absolute");
                 $(".overlay").css("border","1px black solid");
@@ -90,22 +91,21 @@ function game() {
 
 				//Check for last tile
 				if(n!=0 || m!=9) {
+					//console.log("Picking storyline");
                 	var rnd=Math.random();
-	                rnd=Math.random();
-	                var oc=Math.floor(storyline.length*Math.random());
-	                if(oc>=storyline.length) {
-	                    oc=storyline.length-1;
+	                var storyline_index=Math.floor(storyline.length*rnd);
+	                if(storyline_index>=storyline.length) {
+	                    storyline_index=storyline.length-1;
 	                }
-	                $(".first_line").html(storyline[oc].situation);
-	                $(".second_line").html(storyline[oc].wager);
-					//$("#situation_image").attr("src","/images/" + storyline[oc].situation_image);
+	                $(".first_line").html(storyline[storyline_index].situation);
+	                $(".second_line").html(storyline[storyline_index].wager);
+					//$("#situation_image").attr("src","/images/" + storyline[storyline_index].situation_image);
 	                $("#overlay").show();
-	                clearInterval(i);
 				
 				
 	                $("#bet").click(function() {
 						$("#overlay").hide();
-                        $(".first_line").html("You wagered " + $("#amount").val() + " " + storyline[oc].wager);
+                        $(".first_line").html("You wagered " + $("#amount").val() + " " + storyline[storyline_index].wager);
                         $(".second_line").html("It's time to play");
                         $("#overlay2").show();
                         $("#results").hide();
@@ -138,7 +138,6 @@ function game() {
 
                             var i=setInterval(function(){
                                 t += 1;
-                                var bi;
                                 if(t==0) {
                                     $("#leftHand").css("background-image","url('/frontend/paperClear.gif')");
                                     $("#rightHand").css("background-image","url('/frontend/paperClear.gif')");
@@ -186,9 +185,10 @@ function game() {
                                         }
                                     }
 									$("#balance").html(pBalance);
+									var bi;
                                     //Blink for win
                                     if(result==0) {
-                                        var bi=setInterval(function(){
+                                        bi=setInterval(function(){
                                             if(parity==0) {
                                                 $("#leftHand").css("background-image","url('/frontend/" + leftImg + "Clear.gif')");
                                                 $("#rightHand").css("background-image","url('/frontend/" + rightImg + "Clear.gif')");
@@ -212,11 +212,11 @@ function game() {
                                         $("#overlay2").hide();
                                         if(result==0) {
                                             $("#outcome").html("You won!");
-                                            $("#outcome-second-line").html(storyline[oc].win);
+                                            $("#outcome-second-line").html(storyline[storyline_index].win);
                                         }
                                         else {
                                             $("#outcome").html("You lost!");
-                                            $("#outcome-second-line").html(storyline[oc].lose);
+                                            $("#outcome-second-line").html(storyline[storyline_index].lose);
                                         }
                                         $("#overlay3").show();
 
@@ -238,7 +238,7 @@ function game() {
 					$("#overlay4").show();
 				}
  			}
-        },1);
+        },10);
     }
     function draw() {
         var canvas = document.getElementById("main_canvas");
