@@ -208,7 +208,7 @@ function game() {
                                             $(".overlay").hide();
                                             draw();
                                             canMove=1;
-                                        },1000);
+                                        },4000);
                                     },3000);
                                 }
                         },500);
@@ -298,7 +298,7 @@ function game() {
     function movePerson(x,y,toX,toY, dir) {
         var t=0;
         var i=setInterval(function(){
-            t += .01;
+            t += .05;
             drawTile(x,y);
             ctx.fillStyle="#FFF";
             draw();
