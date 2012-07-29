@@ -10,16 +10,16 @@ body {
 	background: #eee;
 	border: 1px solid #ccc;
 	border-radius: 3px;
-	padding-left:8px;
 	padding-top:10px;
 }
 
 .first_line {
 	display: block;
+	font-style:italic;
 	padding-left: 4px;
 	padding-top: 16px;
 	font-size: 22px;
-	letter-spacing: .8px;
+	letter-spacing: 1px;
 	padding-bottom: 4px;
 	border-bottom: 1px solid black;
 	text-align: left;
@@ -28,14 +28,15 @@ body {
 .second_line {
 	padding-left: 4px;
 	padding-top: 15px;
+	font-weight:bold;
 	display: block;
 	border-bottom: 1px solid black;
 	padding-bottom: 4px;
-	text-align: center;
+	text-align: left;
 	background: white;
 	font-size: 25px;
 	line-height: 25px;
-	letter-spacing:.92px;
+	letter-spacing:1px;
 }
 
 #wager {
@@ -52,19 +53,23 @@ input {
 	border: none;
 	font-size:32pt;
 }
-
-input[type="button"] {
-	height: 60px;
-	width: 100px;
+#input_container {
+	float:left;
+}
+#button {
+	height: 50px;
+	width: 200px;
+	background-image:url('/frontend/wager.png');
 	border-radius: 3px;
 	border: none;
 	padding-top: 15px;
 	text-align: center;
 	font-size: 24px;
-	background: #F57A2E;
+	float:right;
+	/*background: #F57A2E;*/
 	text-decoration: underline;
 }
-input[type="button"]:hover {
+#button:hover {
 	color:black;
 }
 #title-bar {
