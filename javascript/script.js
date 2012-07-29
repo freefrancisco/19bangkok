@@ -12,6 +12,8 @@ function game() {
 	var WATER=2;
 	var outcome = ["It looks like you've come across a sketchy lady.<br/>I've got a bad feeling about this...","Outcome 2","Outcome 3"];
 	var wagerFor = ["to try to get away", "to try to balh", "to try to ..."];
+	var winResult = ["winResultA","winResultB","winResultC"];
+	var loseResult = ["loseResultA","loseResultB","loseResultC"];
 	//var good = ["You made a new friend!! You just doubled your money.", "You gota great massage!!! You just doubled your money!", "You had a great dinner with friend!!! Your just doubled our money."];
 	//var bad = ["You got robbed by a tranny hooker. You just lost a quarter of your money!!", "You got caught with dope. You just lost half your money!!", "You got a stomach bug. You just lost half your money."];
 
@@ -187,9 +189,21 @@ function game() {
 									if(result==0) {
 										clearInterval(bi);
 									}
-									$(".overlay").hide();
-									draw();
-									canMove=1;
+									$("#overlay2").hide();
+									$("#overlay3").show();
+									if(result==0) {
+										$("#outcome").html("You won!");
+										$("#outcome-second-line").html(winResult[oc]);
+									}
+									else {
+										$("#outcome").html("You lost!");
+										$("#outcome-second-line").html(loseResult[oc]);
+									}
+									setTimeout(function() {
+										$(".overlay").hide();
+										draw();
+										canMove=1;
+									},1000);
 								},3000);
 							}
 						},500);
