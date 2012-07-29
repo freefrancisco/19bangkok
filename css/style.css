@@ -10,16 +10,19 @@ body {
 	background: #eee;
 	border: 1px solid #ccc;
 	border-radius: 3px;
+	padding-left:8px;
+	padding-top:10px;
 }
 
 .first_line {
 	display: block;
 	padding-left: 4px;
 	padding-top: 16px;
-	font-size: 16px;
+	font-size: 22px;
+	letter-spacing: .8px;
 	padding-bottom: 4px;
 	border-bottom: 1px solid black;
-	text-align: center;
+	text-align: left;
 }
 
 .second_line {
@@ -30,8 +33,9 @@ body {
 	padding-bottom: 4px;
 	text-align: center;
 	background: white;
-	font-size: 20px;
+	font-size: 25px;
 	line-height: 25px;
+	letter-spacing:.92px;
 }
 
 #wager {
