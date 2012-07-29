@@ -97,16 +97,16 @@ function game() {
 	                    oc=storyline.length-1;
 	                }
 	                $(".first_line").html(storyline[oc].situation);
-	                $(".second_line").html("Make a wager and try to get away!");
+	                $(".second_line").html(storyline[oc].wager);
 					//$("#situation_image").attr("src","/images/" + storyline[oc].situation_image);
 	                $("#overlay").show();
 	                clearInterval(i);
 				
 				
 	                $("#bet").click(function() {
+						$("#overlay").hide();
                         $(".first_line").html("You wagered " + $("#amount").val() + " " + storyline[oc].wager);
                         $(".second_line").html("It's time to play");
-                        $("#overlay").hide();
                         $("#overlay2").show();
                         $("#results").hide();
                         var result;
@@ -210,7 +210,6 @@ function game() {
                                             clearInterval(bi);
                                         }
                                         $("#overlay2").hide();
-                                        $("#overlay3").show();
                                         if(result==0) {
                                             $("#outcome").html("You won!");
                                             $("#outcome-second-line").html(storyline[oc].win);
@@ -219,6 +218,8 @@ function game() {
                                             $("#outcome").html("You lost!");
                                             $("#outcome-second-line").html(storyline[oc].lose);
                                         }
+                                        $("#overlay3").show();
+
                                         setTimeout(function() {
                                             $(".overlay").hide();
                                             draw();
