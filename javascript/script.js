@@ -91,7 +91,7 @@ function game() {
 
 				//Check for last tile
 				if(n!=0 || m!=9) {
-					//console.log("Picking storyline");
+					console.log("Picking storyline");
                 	var rnd=Math.random();
 	                var storyline_index=Math.floor(storyline.length*rnd);
 	                if(storyline_index>=storyline.length) {
@@ -102,7 +102,7 @@ function game() {
 					//$("#situation_image").attr("src","/images/" + storyline[storyline_index].situation_image);
 	                $("#overlay").show();
 				
-				
+					$("#bet").unbind();
 	                $("#bet").click(function() {
 						$("#overlay").hide();
                         $(".first_line").html("You wagered " + $("#amount").val() + " " + storyline[storyline_index].wager);
